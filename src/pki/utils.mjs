@@ -168,7 +168,8 @@ function generateCSR(
         type: "pkcs8",
         format: "pem",
       })
-    )
+    ),
+    forge.md.sha256.create()
   )
   return forge.pki.certificationRequestToPem(csr)
 }
