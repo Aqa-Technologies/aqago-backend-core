@@ -189,7 +189,10 @@ function issueCertificateFromCSR(csr, issuer, serialNumber, validity) {
       .certificationRequestFromPem(csr)
       .getAttribute({ name: "extensionRequest" }).extensions
   )
-  cert.sign(forge.pki.privateKeyFromPem(issuer.private))
+  cert.sign(
+    forge.pki.privateKeyFromPem(issuer.private),
+    forge.md.sha256.create()
+  )
   return forge.pki.certificateToPem(cert)
 }
 
